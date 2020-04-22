@@ -34,15 +34,11 @@ namespace SkyViewC3DB.Services
             _context.SaveChanges();
         }
 
-        public bool Login(string id, string password)
+
+        public Boolean Login(string name, string password)
         {
-            return false;
+            throw new NotImplementedException("Not fully implemented.");
         }
 
-        public List<User> GetAllUsers()
-        {
-            var query = from u in _context.Users orderby u.Name select u;
-            return query.ToList();
-        }
     }
 }
