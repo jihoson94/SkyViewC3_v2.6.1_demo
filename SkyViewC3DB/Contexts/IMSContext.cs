@@ -18,7 +18,7 @@ namespace SkyViewC3DB.Contexts
 
         public IMSContext()
         {
-            // Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         /// <summary>

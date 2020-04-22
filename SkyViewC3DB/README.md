@@ -1,4 +1,28 @@
-# DB Feature
+# SkyViewC3 DB Demo Project
+
+# Migration Setting
+
+- Add Package
+
+```
+$ dotent add package Microsoft.EntityFrameworkCore.Sqlite
+
+$ dotnet add package Microsoft.EntityFrameworkCore.Tools.DotNet
+```
+
+- Edit .csproj for using **EF** Command
+
+```
+// add this setting in .csproj
+<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+```
+
+- Command Migration
+
+```
+$ dotnet ef migrations add [Migration Name]
+$ dotnet ef database update
+```
 
 ## Task about user
 
