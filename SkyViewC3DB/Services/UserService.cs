@@ -1,6 +1,7 @@
 
 using SkyViewC3DB.Contexts;
 using SkyViewC3DB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,19 +16,27 @@ namespace SkyViewC3DB.Services
             _context = context;
         }
 
-        public void AddUser(string Name)
+        public void AddUser(string name, string password, string email)
         {
-            var newUesr = new User();
-            newUesr.Name = Name;
-            newUesr.Grade = new Grade()
+            var newUser = new User();
+            newUser.Password = password;
+            newUser.Email = email;
+            newUser.Name = name;
+            newUser.Created = DateTime.Today;
+            newUser.Grade = new Grade()
             {
                 GradeType = new GradeType()
                 {
                     GradeTypeName = "Developer"
                 }
             };
-            _context.Users.Add(newUesr);
+            _context.Users.Add(newUser);
             _context.SaveChanges();
+        }
+
+        public bool Login(string id, string password)
+        {
+            return false;
         }
 
         public List<User> GetAllUsers()
