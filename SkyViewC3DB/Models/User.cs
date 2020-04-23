@@ -11,7 +11,6 @@ namespace SkyViewC3DB.Models
         public string Name { get; set; }
         public DateTime Created { get; set; }
 
-
         public Nullable<int> GradeId { get; set; }
         public Grade Grade { get; set; }
 

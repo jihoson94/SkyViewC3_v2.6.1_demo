@@ -29,6 +29,10 @@ namespace SkyViewC3DB.Contexts
         : base(options)
         { }
 
+        /// <summary>
+        /// DB Connection Setting
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

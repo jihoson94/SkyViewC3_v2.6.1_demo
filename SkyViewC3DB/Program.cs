@@ -8,7 +8,7 @@ namespace SkyViewC3DB
     {
         static void Main(string[] args)
         {
-            // not implement;
+
         }
 
     }

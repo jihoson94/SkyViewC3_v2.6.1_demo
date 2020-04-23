@@ -16,6 +16,7 @@ namespace SkyViewC3DB.Services
             _context = context;
         }
 
+
         public void AddUser(string name, string password, string email)
         {
             var newUser = new User();
@@ -34,11 +35,9 @@ namespace SkyViewC3DB.Services
             _context.SaveChanges();
         }
 
-
         public Boolean Login(string name, string password)
         {
             throw new NotImplementedException("Not fully implemented.");
         }
-
     }
 }
