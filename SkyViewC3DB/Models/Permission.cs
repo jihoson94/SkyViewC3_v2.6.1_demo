@@ -7,7 +7,7 @@ namespace SkyViewC3DB.Models
         public int PermissionTypeId { get; set; }
         public PermissionType PermissionType { get; set; }
 
-        public int UserId { get; set; }
+        public string UserID { get; set; }
         public User User { get; set; }
     }
 }

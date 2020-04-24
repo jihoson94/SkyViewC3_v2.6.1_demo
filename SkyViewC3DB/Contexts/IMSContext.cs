@@ -8,17 +8,15 @@ namespace SkyViewC3DB.Contexts
     {
 
         public DbSet<User> Users { get; set; }
-
-        public DbSet<GradeType> GradeTypes { get; set; }
-        public DbSet<Grade> Grades { get; set; }
-
-        public DbSet<PermissionType> PermissionTypes { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
-
+        public DbSet<Rack> Racks { get; set; }
+        public DbSet<Box> Boxes { get; set; }
+        public DbSet<Vial> Vials { get; set; }
+        public DbSet<BoxAction> BoxActions { get; set; }
+        public DbSet<VialAction> VialActions { get; set; }
 
         public IMSContext()
         {
-            Database.EnsureCreated();
+            // Database.EnsureCreated();
         }
 
         /// <summary>
@@ -46,7 +44,9 @@ namespace SkyViewC3DB.Contexts
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Fluent API
+            // Index setting.
+            modelBuilder.Entity<BoxAction>().HasIndex(ba => new { ba.RackID, ba.Position, ba.Time });
+            modelBuilder.Entity<VialAction>().HasIndex(va => new { va.BoxID, va.Position, va.Time });
         }
     }
 }

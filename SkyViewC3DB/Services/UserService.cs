@@ -1,6 +1,7 @@
 
 using SkyViewC3DB.Contexts;
 using SkyViewC3DB.Models;
+using SkyViewC3DB.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,28 +17,37 @@ namespace SkyViewC3DB.Services
             _context = context;
         }
 
-
-        public void AddUser(string name, string password, string email)
+        public bool IsUserExist(string UserID)
         {
-            var newUser = new User();
-            newUser.Password = password;
-            newUser.Email = email;
-            newUser.Name = name;
-            newUser.Created = DateTime.Today;
-            newUser.Grade = new Grade()
+            var user = _context.Users.Find(UserID);
+            if (user == null)
             {
-                GradeType = new GradeType()
-                {
-                    GradeTypeName = "Developer"
-                }
-            };
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
+                return false;
+            }
+            return true;
         }
 
-        public Boolean Login(string name, string password)
+        public void AddUser(
+            string UserId,
+            string Password,
+            string Email,
+            string Name
+            )
         {
-            throw new NotImplementedException("Not fully implemented.");
+            if (IsUserExist(UserId))
+            {
+                throw new UserAlreadyExistException(nameof(AddUser));
+            }
+
+            var user = new User();
+            user.UserID = UserId;
+            user.Password = Password;
+            user.Email = Email;
+            user.Name = Name;
+            user.IsDelete = false;
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
     }
 }

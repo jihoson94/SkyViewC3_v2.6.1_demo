@@ -45,7 +45,7 @@ namespace SkyViewC3DB.Tests
         public void Add_user_to_database()
         {
             var service = new UserService(_contextFixture);
-            service.AddUser("jihoson", "123", "jihoson94@rnd.re.kr");
+            service.AddUser("jihoson94", "123", "jihoson94@rnd.re.kr", "jihoson");
             _contextFixture.SaveChanges();
             Assert.Equal(1, _contextFixture.Users.Count());
         }

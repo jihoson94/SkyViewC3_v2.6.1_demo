@@ -29,6 +29,7 @@ namespace SkyViewC3Worker
         {
             services.AddControllers();
             services.AddHostedService<TimedHostedService>();
+            
             // services.AddSingleton<TankStatusService>();
         }
 
