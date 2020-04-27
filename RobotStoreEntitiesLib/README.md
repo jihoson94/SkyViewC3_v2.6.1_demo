@@ -4,13 +4,13 @@
 
 ### User Tables
 
-- [ ] User
-- [ ] UserHistory
-- [ ] Grade
+- [x] User
+- [x] UserHistory
+- [x] Grade
 - [ ] GradeInitialPermission
-- [ ] Permission
-- [ ] UserPermission
-- [ ] UserPermissionHistory
+- [x] Permission
+- [x] UserPermission
+- [x] UserPermissionHistory
 - [ ] UserAction
 
 ### Config Tables
