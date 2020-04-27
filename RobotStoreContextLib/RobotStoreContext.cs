@@ -5,6 +5,10 @@ namespace RobotStoreContextLib
 {
     public class RobotStoreContext : DbContext
     {
+        public RobotStoreContext(DbContextOptions<RobotStoreContext> options) : base(options)
+        {
+            Database.Migrate();
+        }
         public DbSet<User> Users;
         public DbSet<UserHistory> UserHistories;
         public DbSet<Permission> Permissions;
