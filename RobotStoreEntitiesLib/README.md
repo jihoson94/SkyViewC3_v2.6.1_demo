@@ -7,11 +7,11 @@
 - [x] User
 - [x] UserHistory
 - [x] Grade
-- [ ] GradeInitialPermission
+- [x] GradeInitialPermission
 - [x] Permission
 - [x] UserPermission
 - [x] UserPermissionHistory
-- [ ] UserAction
+- [x] UserAction
 
 ### Config Tables
 
