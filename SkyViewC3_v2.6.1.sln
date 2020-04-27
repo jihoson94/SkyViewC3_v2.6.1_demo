@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyViewC3DB", "SkyViewC3DB\SkyViewC3DB.csproj", "{228B0EFD-5C56-4E27-90D6-1F4516B56856}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyViewC3DB.Tests", "SkyViewC3DB.Tests\SkyViewC3DB.Tests.csproj", "{E0368F50-A125-45EB-9520-76E3BBF795E5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotStoreEntitiesLib", "RobotStoreEntitiesLib\RobotStoreEntitiesLib.csproj", "{528961A4-AF75-4F2D-86AC-5343E30D4479}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotStoreContextLib", "RobotStoreContextLib\RobotStoreContextLib.csproj", "{46571FE1-4A05-44E2-8DD1-90F6F5C9C5DA}"
