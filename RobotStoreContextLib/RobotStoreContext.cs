@@ -35,6 +35,13 @@ namespace RobotStoreContextLib
         public DbSet<SpaceOwnerShipHistory> SpaceOwnerShipHistories;
         #endregion
 
+        #region DbSet About Config
+        DbSet<TankConfig> TankConfigs;
+        DbSet<TankConfigHistory> TankConfigHistories;
+        DbSet<SystemConfig> SystemConfigs;
+        DbSet<SystemConfigHistory> SystemConfigHistories;
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -203,6 +210,30 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.User).WithMany().HasForeignKey(sosh => sosh.UserID);
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.AddBy).WithMany();
             modelBuilder.Entity<SpaceOwnerShipHistory>().Property(sosh => sosh.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+            #endregion
+
+            #region DB Configure About Configuration
+
+            #region TankConfig
+            modelBuilder.Entity<TankConfig>().HasKey(tc => tc.ConfigName);
+            #endregion
+
+            #region TankConfigHistory
+            modelBuilder.Entity<TankConfigHistory>().HasKey(tch => tch.TankConfigHistoryID);
+            modelBuilder.Entity<TankConfigHistory>().HasOne<User>(tch => tch.AddBy).WithMany();
+            modelBuilder.Entity<TankConfigHistory>().Property(tch => tch.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+            #region SystemConfig
+            modelBuilder.Entity<SystemConfig>().HasKey(sc => sc.ConfigName);
+            #endregion
+
+            #region SystemConfigHistory
+            modelBuilder.Entity<SystemConfigHistory>().HasKey(sch => sch.SystemConfigHistoryID);
+            modelBuilder.Entity<SystemConfigHistory>().HasOne<User>(sch => sch.AddBy).WithMany();
+            modelBuilder.Entity<SystemConfigHistory>().Property(sch => sch.AddDate).HasDefaultValueSql("getdate()");
             #endregion
 
             #endregion
