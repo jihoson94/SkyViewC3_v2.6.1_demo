@@ -42,6 +42,17 @@ namespace RobotStoreContextLib
         DbSet<SystemConfigHistory> SystemConfigHistories;
         #endregion
 
+        #region DbSet About Calibration
+        public DbSet<LN2LevelCalibration> LN2LevelCalibrations;
+        public DbSet<LN2LevelCalibratoinHistory> LN2LevelCalibratoinHistories;
+        public DbSet<TopTempCalibration> TopTempCalibrations;
+        public DbSet<TopTempCalibrationHistory> topTempCalibrationHistories;
+        public DbSet<BottomTempCalibration> BottomTempCalibrations;
+        public DbSet<BottomTempCalibrationHistory> BottomTempCalibrationHistories;
+        public DbSet<ByPassTempCalibration> ByPassTempCalibrations;
+        public DbSet<ByPassTempCalibrationHistory> ByPassTempCalibrationHistories;
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -237,6 +248,48 @@ namespace RobotStoreContextLib
             #endregion
 
             #endregion
+
+            #region DB Configure About Calibration
+
+            #region LN2LevelCalibration
+            modelBuilder.Entity<LN2LevelCalibration>().HasKey(c => new { c.Reference, c.Value });
+            #endregion
+            #region LN2LevelCalibrationHistory
+            modelBuilder.Entity<LN2LevelCalibratoinHistory>().HasKey(h => h.LN2LevelCalibratoinHistoryID);
+            modelBuilder.Entity<LN2LevelCalibratoinHistory>().HasOne(h => h.AddBy).WithMany();
+            modelBuilder.Entity<LN2LevelCalibratoinHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+            #region TopTempCalibration
+            modelBuilder.Entity<TopTempCalibration>().HasKey(c => new { c.Reference, c.Value });
+            #endregion
+            #region TopTempCalibrationHistory
+            modelBuilder.Entity<TopTempCalibrationHistory>().HasKey(h => h.TopTempCalibrationHistoryID);
+            modelBuilder.Entity<TopTempCalibrationHistory>().HasOne(h => h.AddBy).WithMany();
+            modelBuilder.Entity<TopTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+            #endregion 
+
+            #region BottomTempCalibration
+            modelBuilder.Entity<BottomTempCalibration>().HasKey(c => new { c.Reference, c.Value });
+            #endregion
+            #region BottomTempCalibrationHistory
+            modelBuilder.Entity<BottomTempCalibrationHistory>().HasKey(h => h.BottomTempCalibrationHistoryID);
+            modelBuilder.Entity<BottomTempCalibrationHistory>().HasOne(h => h.AddBy).WithMany();
+            modelBuilder.Entity<BottomTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+            #region ByPassCalibration
+            modelBuilder.Entity<ByPassTempCalibration>().HasKey(c => new { c.Reference, c.Value });
+            #endregion
+            #region ByPassCalibrationHistory
+            modelBuilder.Entity<ByPassTempCalibrationHistory>().HasKey(h => h.ByPassTempCalibrationHistoryID);
+            modelBuilder.Entity<ByPassTempCalibrationHistory>().HasOne(h => h.AddBy).WithMany();
+            modelBuilder.Entity<ByPassTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+
+            #endregion
+
+            #endregion
+
         }
     }
 }

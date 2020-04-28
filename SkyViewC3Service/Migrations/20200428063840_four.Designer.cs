@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RobotStoreContextLib;
 
 namespace SkyViewC3Service.Migrations
 {
     [DbContext(typeof(RobotStoreContext))]
-    partial class RobotStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20200428063840_four")]
+    partial class four
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
