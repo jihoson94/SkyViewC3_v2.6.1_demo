@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "RobotStoreContextLib"
+    },
+    {
+      "path": "RobotStoreEntitiesLib"
+    },
+    {
+      "path": "SkyViewC3Service"
+    }
+  ],
+  "settings": {}
+}

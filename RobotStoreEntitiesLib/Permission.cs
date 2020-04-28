@@ -3,7 +3,6 @@ namespace RobotStoreEntitiesLib
 {
     public class Permission
     {
-        [Key]
-        public string Name { get; set; }
+        public string PermissionID { get; set; }
     }
 }
