@@ -192,13 +192,11 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<VialHistory>().Property(vh => vh.AddDate).HasDefaultValueSql("getdate()");
             #endregion
 
-
             #region SpaceOwnerShip
             modelBuilder.Entity<SpaceOwnership>().HasKey(sos => new { sos.RackID, sos.Slot, sos.UserID });
             modelBuilder.Entity<SpaceOwnership>().HasOne(sos => sos.Rack).WithMany().HasForeignKey(sos => sos.RackID);
             modelBuilder.Entity<SpaceOwnership>().HasOne(sos => sos.User).WithMany().HasForeignKey(sos => sos.UserID);
             #endregion
-
             #region SpaceOwnerShipHistory
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasKey(sosh => sosh.SpaceOwnerShipHistoryID);
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<Rack>(sosh => sosh.Rack).WithMany().HasForeignKey(sosh => sosh.RackID);
@@ -206,7 +204,6 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.AddBy).WithMany();
             modelBuilder.Entity<SpaceOwnerShipHistory>().Property(sosh => sosh.AddDate).HasDefaultValueSql("getdate()");
             #endregion
-
 
             #endregion
         }

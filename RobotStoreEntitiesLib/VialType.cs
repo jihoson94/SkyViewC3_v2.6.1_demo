@@ -2,6 +2,6 @@ namespace RobotStoreEntitiesLib
 {
     public class VialType
     {
-        public string Name;
+        public string Name { get; set; }
     }
 }
