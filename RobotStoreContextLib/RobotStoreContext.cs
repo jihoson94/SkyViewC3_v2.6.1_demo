@@ -9,6 +9,8 @@ namespace RobotStoreContextLib
         {
             Database.Migrate();
         }
+
+        #region DbSet About User
         public DbSet<User> Users;
         public DbSet<UserHistory> UserHistories;
         public DbSet<Permission> Permissions;
@@ -18,9 +20,26 @@ namespace RobotStoreContextLib
         public DbSet<GradeInitialPermission> GradeInitialPermissions;
         public DbSet<UserAction> UserActions;
 
+        #endregion
+
+        #region DbSet About IMS
+        public DbSet<Rack> Racks;
+        public DbSet<RackType> RackType;
+        public DbSet<Box> Boxes;
+        public DbSet<BoxType> BoxTypes;
+        public DbSet<BoxHistory> BoxHistories;
+        public DbSet<Vial> Vials;
+        public DbSet<VialType> VialTypes;
+        public DbSet<VialHistory> VialHistories;
+        public DbSet<SpaceOwnership> SpaceOwnerships;
+        public DbSet<SpaceOwnerShipHistory> SpaceOwnerShipHistories;
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            #region DB Configure About User
 
             #region User
             modelBuilder.Entity<User>().HasKey(u => u.UserID);
@@ -109,7 +128,87 @@ namespace RobotStoreContextLib
                 .HasForeignKey(gip => gip.PermissionID);
             #endregion
 
+            #endregion
 
+            #region DB Configure About IMS
+
+            #region Rack
+            modelBuilder.Entity<Rack>().HasKey(r => r.RackID);
+            modelBuilder.Entity<Rack>()
+                .HasOne<RackType>(r => r.RackType)
+                .WithMany()
+                .HasForeignKey(r => r.RackTypeName);
+
+            modelBuilder.Entity<Rack>()
+                .HasMany<Box>(r => r.Boxes)
+                .WithOne(b => b.Rack)
+                .HasForeignKey(b => b.RackID);
+            #endregion
+            #region RackType
+            modelBuilder.Entity<RackType>().HasKey(rt => rt.Name);
+            #endregion
+
+            #region Box
+            modelBuilder.Entity<Box>().HasKey(b => b.BoxID);
+            modelBuilder.Entity<Box>()
+                .HasOne(b => b.Rack)
+                .WithMany(r => r.Boxes)
+                .HasForeignKey(b => b.RackID);
+            modelBuilder.Entity<Box>()
+                .HasOne(b => b.BoxType)
+                .WithMany()
+                .HasForeignKey(b => b.BoxTypeName);
+            modelBuilder.Entity<Box>()
+                .HasMany(b => b.Vials)
+                .WithOne(v => v.Box)
+                .HasForeignKey(v => v.BoxID);
+            #endregion
+            #region BoxType
+            modelBuilder.Entity<BoxType>().HasKey(bt => bt.Name);
+            #endregion
+            #region BoxHistory
+            modelBuilder.Entity<BoxHistory>().HasKey(bh => bh.BoxHistoryID);
+            modelBuilder.Entity<BoxHistory>().HasOne<Box>(bh => bh.Box).WithMany().HasForeignKey(bh => bh.BoxID);
+            modelBuilder.Entity<BoxHistory>().HasOne<Rack>(bh => bh.Rack).WithMany().HasForeignKey(bh => bh.RackID);
+            modelBuilder.Entity<BoxHistory>().HasOne<BoxType>(bh => bh.BoxType).WithMany().HasForeignKey(bh => bh.BoxTypeName);
+            modelBuilder.Entity<BoxHistory>().HasOne<User>(bh => bh.AddBy).WithMany();
+            modelBuilder.Entity<BoxHistory>().Property(bh => bh.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+            #region Vial
+            modelBuilder.Entity<Vial>().HasKey(v => v.VialID);
+            modelBuilder.Entity<Vial>().HasOne<Box>(v => v.Box).WithMany(b => b.Vials).HasForeignKey(v => v.BoxID);
+            modelBuilder.Entity<Vial>().HasOne<VialType>(v => v.VialType).WithMany().HasForeignKey(v => v.VialTypeName);
+            #endregion
+            #region VialType
+            modelBuilder.Entity<VialType>().HasKey(vt => vt.Name);
+            #endregion
+            #region VialHistory
+            modelBuilder.Entity<VialHistory>().HasKey(vh => vh.VialHistoryID);
+            modelBuilder.Entity<VialHistory>().HasOne<Vial>(vh => vh.Vial).WithMany().HasForeignKey(vh => vh.VialID);
+            modelBuilder.Entity<VialHistory>().HasOne<Box>(vh => vh.Box).WithMany().HasForeignKey(vh => vh.BoxID);
+            modelBuilder.Entity<VialHistory>().HasOne<VialType>(vh => vh.VialType).WithMany().HasForeignKey(vh => vh.VialTypeName);
+            modelBuilder.Entity<VialHistory>().HasOne<User>(vh => vh.AddBy).WithMany();
+            modelBuilder.Entity<VialHistory>().Property(vh => vh.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+
+            #region SpaceOwnerShip
+            modelBuilder.Entity<SpaceOwnership>().HasKey(sos => new { sos.RackID, sos.Slot, sos.UserID });
+            modelBuilder.Entity<SpaceOwnership>().HasOne(sos => sos.Rack).WithMany().HasForeignKey(sos => sos.RackID);
+            modelBuilder.Entity<SpaceOwnership>().HasOne(sos => sos.User).WithMany().HasForeignKey(sos => sos.UserID);
+            #endregion
+
+            #region SpaceOwnerShipHistory
+            modelBuilder.Entity<SpaceOwnerShipHistory>().HasKey(sosh => sosh.SpaceOwnerShipHistoryID);
+            modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<Rack>(sosh => sosh.Rack).WithMany().HasForeignKey(sosh => sosh.RackID);
+            modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.User).WithMany().HasForeignKey(sosh => sosh.UserID);
+            modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.AddBy).WithMany();
+            modelBuilder.Entity<SpaceOwnerShipHistory>().Property(sosh => sosh.AddDate).HasDefaultValueSql("getdate()");
+            #endregion
+
+
+            #endregion
         }
     }
 }

@@ -11,7 +11,8 @@ namespace RobotStoreEntitiesLib
         public Rack Rack { get; set; }
         public int Slot { get; set; }
         public bool IsOut { get; set; }
-        public BoxType Type { get; set; }
+        public string BoxTypeName { get; set; }
+        public BoxType BoxType { get; set; }
         public User AddBy { get; set; }
         public DateTime AddDate { get; set; }
     }

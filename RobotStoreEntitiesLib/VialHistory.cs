@@ -11,7 +11,8 @@ namespace RobotStoreEntitiesLib
         public Box Box { get; set; }
         public int posisiton { get; set; }
         public bool IsOut { get; set; }
-        public VialType Type { get; set; }
+        public string VialTypeName { get; set; }
+        public VialType VialType { get; set; }
         public User AddBy { get; set; }
         public DateTime AddDate { get; set; }
     }
