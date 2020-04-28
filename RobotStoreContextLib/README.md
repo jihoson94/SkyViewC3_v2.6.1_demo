@@ -45,5 +45,5 @@
 
 ### and so on
 
-- [ ] TankStatusLog
-- [ ] AlarmLog
+- [x] TankStatusLog
+- [x] AlarmLog

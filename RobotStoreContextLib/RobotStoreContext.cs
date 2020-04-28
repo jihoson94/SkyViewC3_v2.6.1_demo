@@ -8,6 +8,7 @@ namespace RobotStoreContextLib
         public RobotStoreContext(DbContextOptions<RobotStoreContext> options) : base(options)
         {
             Database.Migrate();
+
         }
 
         #region DbSet About User
@@ -53,6 +54,11 @@ namespace RobotStoreContextLib
         public DbSet<ByPassTempCalibrationHistory> ByPassTempCalibrationHistories;
         #endregion
 
+        #region DbSet About Log
+        public DbSet<TankStatusLog> TankStatusLogs;
+        public DbSet<AlarmLog> AlarmLogs;
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -81,7 +87,7 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<UserHistory>().HasOne<User>(uh => uh.User).WithMany().HasForeignKey(uh => uh.UserID);
             modelBuilder.Entity<UserHistory>().HasOne<Grade>(uh => uh.Grade).WithMany().HasForeignKey(uh => uh.GradeID);
             modelBuilder.Entity<UserHistory>().HasOne<User>(uh => uh.AddBy).WithMany();
-            modelBuilder.Entity<UserHistory>().Property(uh => uh.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<UserHistory>().Property(uh => uh.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #region UserAction
@@ -120,7 +126,7 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<UserPermissionHistory>()
                 .HasOne<User>(uph => uph.AddBy).WithMany();
             modelBuilder.Entity<UserPermissionHistory>()
-                .Property(uph => uph.AddDate).HasDefaultValueSql("getdate()");
+                .Property(uph => uph.AddDate).HasDefaultValueSql("date('now')");
 
             #endregion
 
@@ -190,7 +196,7 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<BoxHistory>().HasOne<Rack>(bh => bh.Rack).WithMany().HasForeignKey(bh => bh.RackID);
             modelBuilder.Entity<BoxHistory>().HasOne<BoxType>(bh => bh.BoxType).WithMany().HasForeignKey(bh => bh.BoxTypeName);
             modelBuilder.Entity<BoxHistory>().HasOne<User>(bh => bh.AddBy).WithMany();
-            modelBuilder.Entity<BoxHistory>().Property(bh => bh.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<BoxHistory>().Property(bh => bh.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #region Vial
@@ -207,7 +213,7 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<VialHistory>().HasOne<Box>(vh => vh.Box).WithMany().HasForeignKey(vh => vh.BoxID);
             modelBuilder.Entity<VialHistory>().HasOne<VialType>(vh => vh.VialType).WithMany().HasForeignKey(vh => vh.VialTypeName);
             modelBuilder.Entity<VialHistory>().HasOne<User>(vh => vh.AddBy).WithMany();
-            modelBuilder.Entity<VialHistory>().Property(vh => vh.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<VialHistory>().Property(vh => vh.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #region SpaceOwnerShip
@@ -220,7 +226,7 @@ namespace RobotStoreContextLib
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<Rack>(sosh => sosh.Rack).WithMany().HasForeignKey(sosh => sosh.RackID);
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.User).WithMany().HasForeignKey(sosh => sosh.UserID);
             modelBuilder.Entity<SpaceOwnerShipHistory>().HasOne<User>(sosh => sosh.AddBy).WithMany();
-            modelBuilder.Entity<SpaceOwnerShipHistory>().Property(sosh => sosh.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<SpaceOwnerShipHistory>().Property(sosh => sosh.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #endregion
@@ -234,7 +240,7 @@ namespace RobotStoreContextLib
             #region TankConfigHistory
             modelBuilder.Entity<TankConfigHistory>().HasKey(tch => tch.TankConfigHistoryID);
             modelBuilder.Entity<TankConfigHistory>().HasOne<User>(tch => tch.AddBy).WithMany();
-            modelBuilder.Entity<TankConfigHistory>().Property(tch => tch.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<TankConfigHistory>().Property(tch => tch.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #region SystemConfig
@@ -244,7 +250,7 @@ namespace RobotStoreContextLib
             #region SystemConfigHistory
             modelBuilder.Entity<SystemConfigHistory>().HasKey(sch => sch.SystemConfigHistoryID);
             modelBuilder.Entity<SystemConfigHistory>().HasOne<User>(sch => sch.AddBy).WithMany();
-            modelBuilder.Entity<SystemConfigHistory>().Property(sch => sch.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<SystemConfigHistory>().Property(sch => sch.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #endregion
@@ -257,7 +263,7 @@ namespace RobotStoreContextLib
             #region LN2LevelCalibrationHistory
             modelBuilder.Entity<LN2LevelCalibratoinHistory>().HasKey(h => h.LN2LevelCalibratoinHistoryID);
             modelBuilder.Entity<LN2LevelCalibratoinHistory>().HasOne(h => h.AddBy).WithMany();
-            modelBuilder.Entity<LN2LevelCalibratoinHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<LN2LevelCalibratoinHistory>().Property(h => h.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #region TopTempCalibration
@@ -266,7 +272,7 @@ namespace RobotStoreContextLib
             #region TopTempCalibrationHistory
             modelBuilder.Entity<TopTempCalibrationHistory>().HasKey(h => h.TopTempCalibrationHistoryID);
             modelBuilder.Entity<TopTempCalibrationHistory>().HasOne(h => h.AddBy).WithMany();
-            modelBuilder.Entity<TopTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<TopTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("date('now')");
             #endregion 
 
             #region BottomTempCalibration
@@ -275,7 +281,7 @@ namespace RobotStoreContextLib
             #region BottomTempCalibrationHistory
             modelBuilder.Entity<BottomTempCalibrationHistory>().HasKey(h => h.BottomTempCalibrationHistoryID);
             modelBuilder.Entity<BottomTempCalibrationHistory>().HasOne(h => h.AddBy).WithMany();
-            modelBuilder.Entity<BottomTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<BottomTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #region ByPassCalibration
@@ -284,12 +290,25 @@ namespace RobotStoreContextLib
             #region ByPassCalibrationHistory
             modelBuilder.Entity<ByPassTempCalibrationHistory>().HasKey(h => h.ByPassTempCalibrationHistoryID);
             modelBuilder.Entity<ByPassTempCalibrationHistory>().HasOne(h => h.AddBy).WithMany();
-            modelBuilder.Entity<ByPassTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("getdate()");
-
+            modelBuilder.Entity<ByPassTempCalibrationHistory>().Property(h => h.AddDate).HasDefaultValueSql("date('now')");
             #endregion
 
             #endregion
 
+            #region DB Configure About Log
+
+            #region TankStatusLog
+            modelBuilder.Entity<TankStatusLog>().HasKey(tl => tl.TankStatusLogID);
+            modelBuilder.Entity<TankStatusLog>().Property(tl => tl.Created).HasDefaultValueSql("date('now')");
+            #endregion
+
+            #region AlarmLog
+            modelBuilder.Entity<AlarmLog>().HasKey(al => al.AlarmLogID);
+            modelBuilder.Entity<AlarmLog>().Property(al => al.Created).HasDefaultValueSql("date('now')");
+            modelBuilder.Entity<AlarmLog>().Property(al => al.AlarmCode).IsRequired();
+            #endregion
+
+            #endregion
         }
     }
 }

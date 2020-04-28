@@ -16,6 +16,26 @@ namespace SkyViewC3Service.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
+            modelBuilder.Entity("RobotStoreEntitiesLib.AlarmLog", b =>
+                {
+                    b.Property<int>("AlarmLogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AlarmCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("date('now')");
+
+                    b.HasKey("AlarmLogID");
+
+                    b.ToTable("AlarmLog");
+                });
+
             modelBuilder.Entity("RobotStoreEntitiesLib.BottomTempCalibration", b =>
                 {
                     b.Property<double>("Reference")
@@ -44,7 +64,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<double>("Reference")
                         .HasColumnType("REAL");
@@ -97,7 +117,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<string>("BoxID")
                         .HasColumnType("TEXT");
@@ -168,7 +188,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<double>("Reference")
                         .HasColumnType("REAL");
@@ -236,7 +256,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<double>("Reference")
                         .HasColumnType("REAL");
@@ -305,7 +325,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int>("RackID")
                         .HasColumnType("INTEGER");
@@ -370,7 +390,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<string>("ConfigName")
                         .HasColumnType("TEXT");
@@ -410,7 +430,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<string>("ConfigName")
                         .HasColumnType("TEXT");
@@ -423,6 +443,37 @@ namespace SkyViewC3Service.Migrations
                     b.HasIndex("AddByUserID");
 
                     b.ToTable("TankConfigHistory");
+                });
+
+            modelBuilder.Entity("RobotStoreEntitiesLib.TankStatusLog", b =>
+                {
+                    b.Property<int>("TankStatusLogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("BottomTemperature")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("BypassTemperature")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("date('now')");
+
+                    b.Property<double>("LN2Level")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("LN2Usage")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("TopTemperature")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("TankStatusLogID");
+
+                    b.ToTable("TankStatusLog");
                 });
 
             modelBuilder.Entity("RobotStoreEntitiesLib.TopTempCalibration", b =>
@@ -453,7 +504,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<double>("Reference")
                         .HasColumnType("REAL");
@@ -538,7 +589,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -600,7 +651,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<string>("PermissionID")
                         .HasColumnType("TEXT");
@@ -657,7 +708,7 @@ namespace SkyViewC3Service.Migrations
                     b.Property<DateTime>("AddDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<string>("BoxID")
                         .HasColumnType("TEXT");
