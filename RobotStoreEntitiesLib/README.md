@@ -33,15 +33,16 @@
 
 ### IMS Tables
 
-- [ ] Rack
-- [ ] RackType
-- [ ] Box
-- [ ] BoxType
-- [ ] Vial
-- [ ] BoxHistory
-- [ ] VialHistory
-- [ ] SpaceOwnership
-- [ ] SpaceOwnershipHistory
+- [x] Rack
+- [x] RackType
+- [x] Box
+- [x] BoxType
+- [x] Vial
+- [x] VialType
+- [x] BoxHistory
+- [x] VialHistory
+- [x] SpaceOwnership
+- [x] SpaceOwnershipHistory
 
 ### and so on
 

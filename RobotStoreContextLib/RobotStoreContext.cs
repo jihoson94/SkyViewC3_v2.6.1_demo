@@ -108,6 +108,8 @@ namespace RobotStoreContextLib
                 .WithMany()
                 .HasForeignKey(gip => gip.PermissionID);
             #endregion
+
+
         }
     }
 }
