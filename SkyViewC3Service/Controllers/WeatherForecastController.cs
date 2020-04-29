@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RobotStoreEntitiesLib;
+using SkyViewC3Service.Utils;
 
 namespace SkyViewC3Service.Controllers
 {
@@ -24,16 +27,12 @@ namespace SkyViewC3Service.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [ProducesResponseType(200, Type = typeof(User))]
+        public IActionResult GetSessionKey()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            HttpContext.Session.Set<User>("CurrentUser", new User { UserID = "11", Name = "jiho", Password = "123", Email = "jihoson94@rnd.re.kr" });
+            var user = HttpContext.Session.Get<User>("CurrentUser");
+            return Ok(user);
         }
     }
 }

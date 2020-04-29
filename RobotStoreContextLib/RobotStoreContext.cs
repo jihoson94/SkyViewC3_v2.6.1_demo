@@ -79,6 +79,8 @@ namespace RobotStoreContextLib
                 .HasMany<UserPermission>(u => u.Permissions)
                 .WithOne(up => up.User)
                 .HasForeignKey(up => up.UserID);
+
+            modelBuilder.Entity<User>().HasData(new User { UserID = "ADMIN", Name = "admin", Password = "admin" });
             #endregion
 
             #region UserHistory

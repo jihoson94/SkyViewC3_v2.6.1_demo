@@ -6,10 +6,10 @@
 
 - [x] IUserRepository
 - [ ] UserRepository
-- [ ] Create User
+- [x] Create User
 - [ ] Update User
 - [ ] Delete User
-- [ ] Retrieve User (UserID)
+- [x] Retrieve User (UserID)
 - [ ] Retrieve Permission of User
 - [ ] Add Permissions of User
 - [ ] Remove Permissions of User

@@ -17,7 +17,6 @@ namespace SkyViewC3Service.Test.Repositories
     {
         private UserRepository repository;
         private SqliteConnection connection;
-
         private RobotStoreContext context;
         // Setup
         public TestUserRepository()
@@ -37,19 +36,24 @@ namespace SkyViewC3Service.Test.Repositories
             connection.Close();
         }
 
+        [Fact]
+        public async Task TestRetrieveAsync()
+        {
+            var user = await repository.RetrieveAsync("ADMIN");
+            Assert.True(user.UserID == "ADMIN");
+        }
 
         [Fact]
         public async Task TestCreateAsync()
         {
             var newUser = new User()
             {
-                UserID = "Test",
+                UserID = "TEST",
                 Name = "Tester",
                 Email = "test@rnd.re.kr",
                 Password = "123",
                 IsDelete = false
             };
-
             var addedUser = await repository.CreateAsync(newUser);
 
             Assert.True(addedUser.UserID == newUser.UserID);
@@ -66,23 +70,7 @@ namespace SkyViewC3Service.Test.Repositories
             Assert.True(users.Count() == userCountinDB);
         }
 
-        [Fact]
-        public async Task TestRetrieveAsync()
-        {
-            var tempUser = await repository.CreateAsync(new User() { UserID = "test123", Name = "Tester", Password = "123" });
-            var addedUser = await repository.RetrieveAsync(tempUser.UserID);
-            Assert.Equal(tempUser.UserID, addedUser.UserID);
-            Assert.Equal(tempUser.Name, addedUser.Name);
-            Assert.Equal(tempUser.Email, addedUser.Email);
-            Assert.Equal(tempUser.Password, addedUser.Password);
-            Assert.Equal(tempUser.Permissions, addedUser.Permissions);
-        }
 
-        // [Fact]
-        // public async Task TestDeleteAsync()
-        // {
-        //     //TODO: implement
-        // }
 
     }
 }

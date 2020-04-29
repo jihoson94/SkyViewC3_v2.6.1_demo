@@ -30,6 +30,13 @@ namespace SkyViewC3Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.Cookie.HttpOnly = true;
+            });
+
             string databasePath = Path.Combine("..", "skyviewc3.db");
             services.AddDbContext<RobotStoreContext>(
                 options => options.UseSqlite(
@@ -50,12 +57,18 @@ namespace SkyViewC3Service
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
 
+            app.UseRouting();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -41,6 +41,7 @@ namespace SkyViewC3Service.Repositories
         {
             newUser.UserID = newUser.UserID.ToUpper();
             EntityEntry<User> added = await db.Users.AddAsync(newUser);
+
             int affected = await db.SaveChangesAsync();
             if (affected == 1)
             {
@@ -59,12 +60,18 @@ namespace SkyViewC3Service.Repositories
 
         public Task<User> RetrieveAsync(string id)
         {
-            return Task.Run(() =>
+            return Task.Run<User>(() =>
             {
                 id = id.ToUpper();
                 User user;
-                userCache.TryGetValue(id, out user);
-                return user;
+                if (userCache.TryGetValue(id, out user))
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
             });
         }
 
@@ -97,6 +104,11 @@ namespace SkyViewC3Service.Repositories
         public Task<User> UpdateGradeAsync(Grade grade)
         {
             throw new System.NotImplementedException();
+        }
+
+        public Task<bool?> AddUserHistory(User userState, User byUser)
+        {
+            throw new NotImplementedException();
         }
     }
 }
