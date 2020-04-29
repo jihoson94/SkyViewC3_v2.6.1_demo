@@ -52,17 +52,24 @@ namespace SkyViewC3Service.Repositories
             }
         }
 
-        public Task<bool?> DeleteAsync(string id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public Task<IEnumerable<User>> RetrieveAllAsync()
         {
-            throw new System.NotImplementedException();
+            return Task.Run<IEnumerable<User>>(() => userCache.Values);
         }
 
         public Task<User> RetrieveAsync(string id)
+        {
+            return Task.Run(() =>
+            {
+                id = id.ToUpper();
+                User user;
+                userCache.TryGetValue(id, out user);
+                return user;
+            });
+        }
+
+
+        public Task<bool?> DeleteAsync(string id)
         {
             throw new System.NotImplementedException();
         }
