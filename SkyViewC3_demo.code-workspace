@@ -11,6 +11,9 @@
     },
     {
       "path": "SkyViewC3Service"
+    },
+    {
+      "path": "SkyViewC3Service.Test"
     }
   ],
   "settings": {}

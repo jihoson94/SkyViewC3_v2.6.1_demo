@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using RobotStoreContextLib;
+using SkyViewC3Service.Repositories;
 
 namespace SkyViewC3Service
 {
@@ -36,6 +37,9 @@ namespace SkyViewC3Service
                     b => b.MigrationsAssembly("SkyViewC3Service")
                 )
             );
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddControllers();
         }
 

@@ -4,15 +4,15 @@
 
 ### UserRepository
 
-- [ ] IUserRepository
+- [x] IUserRepository
 - [ ] UserRepository
 - [ ] Create User
 - [ ] Update User
 - [ ] Delete User
 - [ ] Retrieve User (UserID)
 - [ ] Retrieve Permission of User
-- [ ] Add Permission of User
-- [ ] Remove Permission of User
+- [ ] Add Permissions of User
+- [ ] Remove Permissions of User
 - [ ] Change Grade of User
 
 ### IMSRepository

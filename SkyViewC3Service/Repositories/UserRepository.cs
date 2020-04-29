@@ -6,6 +6,7 @@ using System.Linq;
 using RobotStoreEntitiesLib;
 using RobotStoreContextLib;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 
 namespace SkyViewC3Service.Repositories
 {
@@ -56,7 +57,7 @@ namespace SkyViewC3Service.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> RetrieveAllSync()
+        public Task<IEnumerable<User>> RetrieveAllAsync()
         {
             throw new System.NotImplementedException();
         }
@@ -67,6 +68,26 @@ namespace SkyViewC3Service.Repositories
         }
 
         public Task<User> UpdateAsync(string id, User user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<UserPermission> RetrieveUserPermissionAsync(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<User> AddUserPermissionAsync(Permission permission)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool?> RemoveUserPermissionAsync(Permission permission)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<User> UpdateGradeAsync(Grade grade)
         {
             throw new System.NotImplementedException();
         }

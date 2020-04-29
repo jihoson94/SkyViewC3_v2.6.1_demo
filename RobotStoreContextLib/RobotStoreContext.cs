@@ -7,56 +7,55 @@ namespace RobotStoreContextLib
     {
         public RobotStoreContext(DbContextOptions<RobotStoreContext> options) : base(options)
         {
-            Database.Migrate();
-
+            // Database.Migrate();
         }
 
         #region DbSet About User
-        public DbSet<User> Users;
-        public DbSet<UserHistory> UserHistories;
-        public DbSet<Permission> Permissions;
-        public DbSet<UserPermission> UserPermissions;
-        public DbSet<UserPermissionHistory> UserPermissionHistories;
-        public DbSet<Grade> Grades;
-        public DbSet<GradeInitialPermission> GradeInitialPermissions;
-        public DbSet<UserAction> UserActions;
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserHistory> UserHistories { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
+        public DbSet<UserPermissionHistory> UserPermissionHistories { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<GradeInitialPermission> GradeInitialPermissions { get; set; }
+        public DbSet<UserAction> UserActions { get; set; }
 
         #endregion
 
         #region DbSet About IMS
-        public DbSet<Rack> Racks;
-        public DbSet<RackType> RackType;
-        public DbSet<Box> Boxes;
-        public DbSet<BoxType> BoxTypes;
-        public DbSet<BoxHistory> BoxHistories;
-        public DbSet<Vial> Vials;
-        public DbSet<VialType> VialTypes;
-        public DbSet<VialHistory> VialHistories;
-        public DbSet<SpaceOwnership> SpaceOwnerships;
-        public DbSet<SpaceOwnerShipHistory> SpaceOwnerShipHistories;
+        public DbSet<Rack> Racks { get; set; }
+        public DbSet<RackType> RackType { get; set; }
+        public DbSet<Box> Boxes { get; set; }
+        public DbSet<BoxType> BoxTypes { get; set; }
+        public DbSet<BoxHistory> BoxHistories { get; set; }
+        public DbSet<Vial> Vials { get; set; }
+        public DbSet<VialType> VialTypes { get; set; }
+        public DbSet<VialHistory> VialHistories { get; set; }
+        public DbSet<SpaceOwnership> SpaceOwnerships { get; set; }
+        public DbSet<SpaceOwnerShipHistory> SpaceOwnerShipHistories { get; set; }
         #endregion
 
         #region DbSet About Config
-        DbSet<TankConfig> TankConfigs;
-        DbSet<TankConfigHistory> TankConfigHistories;
-        DbSet<SystemConfig> SystemConfigs;
-        DbSet<SystemConfigHistory> SystemConfigHistories;
+        DbSet<TankConfig> TankConfigs { get; set; }
+        DbSet<TankConfigHistory> TankConfigHistories { get; set; }
+        DbSet<SystemConfig> SystemConfigs { get; set; }
+        DbSet<SystemConfigHistory> SystemConfigHistories { get; set; }
         #endregion
 
         #region DbSet About Calibration
-        public DbSet<LN2LevelCalibration> LN2LevelCalibrations;
-        public DbSet<LN2LevelCalibratoinHistory> LN2LevelCalibratoinHistories;
-        public DbSet<TopTempCalibration> TopTempCalibrations;
-        public DbSet<TopTempCalibrationHistory> topTempCalibrationHistories;
-        public DbSet<BottomTempCalibration> BottomTempCalibrations;
-        public DbSet<BottomTempCalibrationHistory> BottomTempCalibrationHistories;
-        public DbSet<ByPassTempCalibration> ByPassTempCalibrations;
-        public DbSet<ByPassTempCalibrationHistory> ByPassTempCalibrationHistories;
+        public DbSet<LN2LevelCalibration> LN2LevelCalibrations { get; set; }
+        public DbSet<LN2LevelCalibratoinHistory> LN2LevelCalibratoinHistories { get; set; }
+        public DbSet<TopTempCalibration> TopTempCalibrations { get; set; }
+        public DbSet<TopTempCalibrationHistory> topTempCalibrationHistories { get; set; }
+        public DbSet<BottomTempCalibration> BottomTempCalibrations { get; set; }
+        public DbSet<BottomTempCalibrationHistory> BottomTempCalibrationHistories { get; set; }
+        public DbSet<ByPassTempCalibration> ByPassTempCalibrations { get; set; }
+        public DbSet<ByPassTempCalibrationHistory> ByPassTempCalibrationHistories { get; set; }
         #endregion
 
         #region DbSet About Log
-        public DbSet<TankStatusLog> TankStatusLogs;
-        public DbSet<AlarmLog> AlarmLogs;
+        public DbSet<TankStatusLog> TankStatusLogs { get; set; }
+        public DbSet<AlarmLog> AlarmLogs { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
