@@ -1,8 +1,8 @@
 namespace RobotStoreEntitiesLib
 {
-    public class ByPassTempCalibration
+    public class ByPassTempCalibration : Calibration
     {
-        public double Reference { get; set; }
-        public double Value { get; set; }
+        public override double Reference { get; set; }
+        public override double Value { get; set; }
     }
 }

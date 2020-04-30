@@ -1,8 +1,8 @@
 namespace RobotStoreEntitiesLib
 {
-    public class LN2LevelCalibration
+    public class LN2LevelCalibration : Calibration
     {
-        public double Reference { get; set; }
-        public double Value { get; set; }
+        public override double Reference { get; set; }
+        public override double Value { get; set; }
     }
 }

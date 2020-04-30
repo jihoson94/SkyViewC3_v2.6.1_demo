@@ -46,6 +46,7 @@ namespace SkyViewC3Service
             );
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITankRepository, TankRepository>();
 
             services.AddControllers();
         }
