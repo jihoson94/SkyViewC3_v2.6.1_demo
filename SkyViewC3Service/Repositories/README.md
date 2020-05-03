@@ -34,18 +34,18 @@
 
 ### TankRepository
 
-- [ ] ITankRepository
-- [ ] TankRepository
-- [ ] Create TankConfig
-- [ ] Update TankConfig
-- [ ] Add LN2LevelCalibration
-- [ ] Remove LN2LevelClaibration
-- [ ] Add TopTempCalibration
-- [ ] Remove TopTempCalibration
-- [ ] Add BottomTempClibration
-- [ ] Remove BottomTempClibration
-- [ ] Add ByPassTempCalibration
-- [ ] Remove ByPassTempCalibration
+- [x] ITankRepository
+- [x] TankRepository
+- [x] Create TankConfig
+- [x] Update TankConfig
+- [x] Add LN2LevelCalibration
+- [x] Remove LN2LevelClaibration
+- [x] Add TopTempCalibration
+- [x] Remove TopTempCalibration
+- [x] Add BottomTempClibration
+- [x] Remove BottomTempClibration
+- [x] Add ByPassTempCalibration
+- [x] Remove ByPassTempCalibration
 
 ### LogRepository
 

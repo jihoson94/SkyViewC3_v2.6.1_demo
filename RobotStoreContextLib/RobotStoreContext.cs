@@ -36,10 +36,10 @@ namespace RobotStoreContextLib
         #endregion
 
         #region DbSet About Config
-        DbSet<TankConfig> TankConfigs { get; set; }
-        DbSet<TankConfigHistory> TankConfigHistories { get; set; }
-        DbSet<SystemConfig> SystemConfigs { get; set; }
-        DbSet<SystemConfigHistory> SystemConfigHistories { get; set; }
+        public DbSet<TankConfig> TankConfigs { get; set; }
+        public DbSet<TankConfigHistory> TankConfigHistories { get; set; }
+        public DbSet<SystemConfig> SystemConfigs { get; set; }
+        public DbSet<SystemConfigHistory> SystemConfigHistories { get; set; }
         #endregion
 
         #region DbSet About Calibration
@@ -80,6 +80,7 @@ namespace RobotStoreContextLib
                 .WithOne(up => up.User)
                 .HasForeignKey(up => up.UserID);
 
+            // TODO: To be removed later on?
             modelBuilder.Entity<User>().HasData(new User { UserID = "ADMIN", Name = "admin", Password = "admin" });
             #endregion
 
