@@ -222,8 +222,9 @@ namespace SkyViewC3Service.Test.Repositories
             var hasPermission = await repository.CheckPermissionAsync(newUser.UserID, newPermission);
             Assert.False(hasPermission);
 
-            var result = await repository.AddUserPermissionAsync(newUser.UserID, newPermission);
-            Assert.True(result);
+            var userPermission = await repository.AddUserPermissionAsync(newUser.UserID, newPermission);
+            Assert.True(userPermission.UserID == newUser.UserID);
+            Assert.True(userPermission.PermissionID == newPermission.PermissionID);
             hasPermission = await repository.CheckPermissionAsync(newUser.UserID, newPermission);
             Assert.True(hasPermission);
 
@@ -299,7 +300,57 @@ namespace SkyViewC3Service.Test.Repositories
             Assert.Equal<Grade>(user.Grade, newGrade);
         }
 
+        [Fact]
+        public async Task TestAddUserHistory()
+        {
+            var byUser = new User()
+            {
+                UserID = "TestAdminforAddUserHistory",
+                Name = "Tester",
+                Email = "test@rnd.re.kr",
+                Password = "123",
+                IsDelete = false
+            };
+            var newUser = new User()
+            {
+                UserID = "TestforAddUserHistory",
+                Name = "Tester",
+                Email = "test@rnd.re.kr",
+                Password = "123",
+                IsDelete = false
+            };
 
+
+            byUser = await repository.CreateAsync(byUser); // Login User
+            newUser = await repository.CreateAsync(newUser); // Created User
+            var result = await repository.AddUserHistory(newUser, byUser);
+            Assert.True(result);
+            // TODO : How to Check History
+        }
+
+        [Fact]
+        public async Task AddUserPemissionHistory()
+        {
+            var byUser = new User()
+            {
+                UserID = "TestAdminforAddUserPemissionHistory",
+                Name = "Tester",
+                Email = "test@rnd.re.kr",
+                Password = "123",
+                IsDelete = false
+            };
+
+            byUser = await repository.CreateAsync(byUser); // Login User
+
+            var newPermission = new Permission() { PermissionID = "TestPermission!!!" };
+            context.Permissions.Add(newPermission);
+            context.SaveChanges();
+
+            var userPermission = await repository.AddUserPermissionAsync(byUser.UserID, newPermission);
+
+            var result = await repository.AddUserPemissionHistory(userPermission, byUser, isDelete: false);
+            Assert.True(result);
+        }
 
     }
 }
