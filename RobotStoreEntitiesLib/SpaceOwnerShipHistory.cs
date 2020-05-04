@@ -6,7 +6,7 @@ namespace RobotStoreEntitiesLib
     {
         public int SpaceOwnerShipHistoryID { get; set; }
         public int Slot { get; set; }
-        public int RackID { get; set; }
+        public string RackID { get; set; }
         public Rack Rack { get; set; }
         public string UserID { get; set; }
         public User User { get; set; }

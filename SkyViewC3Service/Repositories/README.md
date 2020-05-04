@@ -17,18 +17,23 @@
 
 ### IMSRepository
 
-- [ ] IIMSRepository
+- [x] IIMSRepository
 - [ ] IMSRepository
 - [ ] Retrieve All Racks
-- [ ] Retrieve All Boxes with RackID
-- [ ] Retrieve All Vial With BoxID
-- [ ] Create Rack
-- [ ] Create Box
-- [ ] Create Vial
-- [ ] Input Box (if exist update box)
+- [ ] Retrieve All Boxes
+- [ ] Retrieve All Vials
+- [ ] Retrieve Vail
+- [ ] Retrieve Box
+- [ ] Retrieve rack
+- [x] Create Rack
+- [x] Create Box
+- [x] Create Vial
+- [x] Input Box (if exist update box)
 - [ ] Input Vial (if exist update vial)
 - [ ] Output Box
 - [ ] Output Vial
+- [ ] Add BoxHistory
+- [ ] Add VialHistory
 
 > SpaceOwnerShip is not yet implement
 

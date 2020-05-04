@@ -7,7 +7,7 @@ namespace RobotStoreEntitiesLib
         public int BoxHistoryID { get; set; }
         public string BoxID { get; set; }
         public Box Box { get; set; }
-        public int RackID { get; set; }
+        public string RackID { get; set; }
         public Rack Rack { get; set; }
         public int Slot { get; set; }
         public bool IsOut { get; set; }
