@@ -7,13 +7,17 @@
 - [x] IUserRepository
 - [ ] UserRepository
 - [x] Create User
-- [ ] Update User
-- [ ] Delete User
+- [x] Update User
+- [x] Delete User
 - [x] Retrieve User (UserID)
-- [ ] Retrieve Permission of User
-- [ ] Add Permissions of User
-- [ ] Remove Permissions of User
-- [ ] Change Grade of User
+- [x] Retrieve All User => Users of isDelete == false
+- [x] Check Permission of User
+- [x] Retrieve Permissions of User
+- [x] Add Permissions of User
+- [x] Remove Permissions of User
+- [x] Change Grade of User
+- [ ] Add User History Data
+- [ ] Add UserPemission History Data
 
 ### IMSRepository
 

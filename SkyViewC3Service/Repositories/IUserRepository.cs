@@ -10,10 +10,11 @@ namespace SkyViewC3Service.Repositories
         Task<bool?> DeleteAsync(string id);
         Task<IEnumerable<User>> RetrieveAllAsync();
         Task<User> RetrieveAsync(string id);
-        Task<UserPermission> RetrieveUserPermissionAsync(string id);
-        Task<User> AddUserPermissionAsync(Permission permission);
-        Task<bool?> RemoveUserPermissionAsync(Permission permission);
-        Task<User> UpdateGradeAsync(Grade grade);
+        Task<IEnumerable<Permission>> RetrieveUserPermissionsAsync(string id);
+        Task<bool> CheckPermissionAsync(string id, Permission permission);
+        Task<bool> AddUserPermissionAsync(string id, Permission permission);
+        Task<bool?> RemoveUserPermissionAsync(string id, Permission permission);
+        Task<User> UpdateGradeAsync(string id, Grade grade);
         Task<bool?> AddUserHistory(User userState, User byUser);
 
     }
