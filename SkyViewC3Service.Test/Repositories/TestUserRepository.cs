@@ -82,7 +82,7 @@ namespace SkyViewC3Service.Test.Repositories
         [Fact]
         public async Task TestRetrieveAllAsync()
         {
-            //TODO: How to Check All Retrieve??
+            //TODO: How to Check All Retrieve?? 
             var users = await repository.RetrieveAllAsync();
         }
 
@@ -323,9 +323,13 @@ namespace SkyViewC3Service.Test.Repositories
 
             byUser = await repository.CreateAsync(byUser); // Login User
             newUser = await repository.CreateAsync(newUser); // Created User
-            var result = await repository.AddUserHistory(newUser, byUser);
-            Assert.True(result);
-            // TODO : How to Check History
+            var addedHistory = await repository.AddUserHistoryAsync(newUser, byUser);
+            Assert.True(addedHistory.AddBy == byUser);
+            Assert.True(addedHistory.UserID == newUser.UserID);
+            Assert.True(addedHistory.Name == newUser.Name);
+            Assert.True(addedHistory.Email == newUser.Email);
+            Assert.False(addedHistory.IsDelete);
+
         }
 
         [Fact]
@@ -348,8 +352,11 @@ namespace SkyViewC3Service.Test.Repositories
 
             var userPermission = await repository.AddUserPermissionAsync(byUser.UserID, newPermission);
 
-            var result = await repository.AddUserPemissionHistory(userPermission, byUser, isDelete: false);
-            Assert.True(result);
+            var addedHistory = await repository.AddUserPemissionHistoryAsync(userPermission, byUser, isDelete: false);
+            Assert.True(addedHistory.Action == "add");
+            Assert.True(addedHistory.PermissionID == userPermission.PermissionID);
+            Assert.True(addedHistory.UserID == byUser.UserID);
+            Assert.True(addedHistory.AddBy == byUser);
         }
 
     }

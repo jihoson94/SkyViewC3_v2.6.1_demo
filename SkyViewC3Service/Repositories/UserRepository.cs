@@ -215,7 +215,7 @@ namespace SkyViewC3Service.Repositories
             }
         }
 
-        public async Task<bool?> AddUserHistory(User userState, User byUser)
+        public async Task<UserHistory> AddUserHistoryAsync(User userState, User byUser)
         {
 
             var userHistory = new UserHistory()
@@ -233,15 +233,15 @@ namespace SkyViewC3Service.Repositories
             var affected = await db.SaveChangesAsync();
             if (affected == 1)
             {
-                return true;
+                return userHistory;
             }
             else
             {
-                return false;
+                return null;
             }
         }
 
-        public async Task<bool?> AddUserPemissionHistory(UserPermission pemissionState, User byUser, bool isDelete)
+        public async Task<UserPermissionHistory> AddUserPemissionHistoryAsync(UserPermission pemissionState, User byUser, bool isDelete)
         {
             var permissionHistory = new UserPermissionHistory()
             {
@@ -255,11 +255,11 @@ namespace SkyViewC3Service.Repositories
             int affected = await db.SaveChangesAsync();
             if (affected == 1)
             {
-                return true;
+                return permissionHistory;
             }
             else
             {
-                return false;
+                return null;
             }
         }
 

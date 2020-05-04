@@ -15,7 +15,7 @@ namespace SkyViewC3Service.Repositories
         Task<UserPermission> AddUserPermissionAsync(string id, Permission permission);
         Task<bool?> RemoveUserPermissionAsync(string id, Permission permission);
         Task<User> UpdateGradeAsync(string id, Grade grade);
-        Task<bool?> AddUserHistory(User userState, User byUser);
-        Task<bool?> AddUserPemissionHistory(UserPermission pemissionState, User byUser, bool isDelete);
+        Task<UserHistory> AddUserHistoryAsync(User userState, User byUser);
+        Task<UserPermissionHistory> AddUserPemissionHistoryAsync(UserPermission pemissionState, User byUser, bool isDelete);
     }
 }

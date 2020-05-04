@@ -5,7 +5,7 @@
 ### UserRepository
 
 - [x] IUserRepository
-- [ ] UserRepository
+- [x] UserRepository
 - [x] Create User
 - [x] Update User
 - [x] Delete User
@@ -16,8 +16,8 @@
 - [x] Add Permissions of User
 - [x] Remove Permissions of User
 - [x] Change Grade of User
-- [ ] Add User History Data
-- [ ] Add UserPemission History Data
+- [x] Add User History Data
+- [x] Add UserPemission History Data
 
 ### IMSRepository
 
