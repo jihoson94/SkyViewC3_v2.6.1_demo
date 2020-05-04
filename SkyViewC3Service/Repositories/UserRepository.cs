@@ -137,14 +137,13 @@ namespace SkyViewC3Service.Repositories
             }
         }
 
-        public async Task<bool> AddUserPermissionAsync(string userID, Permission permission)
+        public async Task<UserPermission> AddUserPermissionAsync(string userID, Permission permission)
         {
             var result = await db.UserPermissions.FirstOrDefaultAsync(
                 up => up.UserID == userID && up.PermissionID == permission.PermissionID);
             if (result != null)
             {
-                // already existed.
-                return false;
+                return null;
             }
             var newUserPermission = new UserPermission();
             newUserPermission.UserID = userID;
@@ -155,11 +154,11 @@ namespace SkyViewC3Service.Repositories
             {
                 var user = db.Users.Where(u => u.UserID == userID).Include(u => u.Permissions).Include(u => u.Grade).FirstOrDefault();
                 UpdateCache(userID, user);
-                return true;
+                return newUserPermission;
             }
             else
             {
-                return false;
+                return null;
             }
         }
 
@@ -216,11 +215,53 @@ namespace SkyViewC3Service.Repositories
             }
         }
 
-        public Task<bool?> AddUserHistory(User userState, User byUser)
+        public async Task<bool?> AddUserHistory(User userState, User byUser)
         {
-            throw new NotImplementedException();
+
+            var userHistory = new UserHistory()
+            {
+                UserID = userState.UserID,
+                Name = userState.Name,
+                Email = userState.Email,
+                Password = userState.Password,
+                GradeID = userState.GradeID,
+                IsDelete = userState.IsDelete,
+                AddDate = DateTime.Now,
+                AddBy = byUser
+            };
+            db.UserHistories.Add(userHistory);
+            var affected = await db.SaveChangesAsync();
+            if (affected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
+        public async Task<bool?> AddUserPemissionHistory(UserPermission pemissionState, User byUser, bool isDelete)
+        {
+            var permissionHistory = new UserPermissionHistory()
+            {
+                UserID = pemissionState.UserID,
+                PermissionID = pemissionState.PermissionID,
+                Action = isDelete ? "remove" : "add",
+                AddBy = byUser,
+                AddDate = DateTime.Now
+            };
+            db.UserPermissionHistories.Add(permissionHistory);
+            int affected = await db.SaveChangesAsync();
+            if (affected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
