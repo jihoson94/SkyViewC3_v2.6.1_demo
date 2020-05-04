@@ -20,27 +20,52 @@ namespace SkyViewC3Service.Repositories
         }
 
         #region TankConfig
-        public async Task<TankConfig> CreateTankConfigAsync(TankConfig tankConfig)
+        public async Task<bool> CreateTankConfigAsync(TankConfig tankConfig)
         {
-            // TODO: Do we need Create?
-            await UpdateTankConfigAsync(tankConfig);
+            // TODO: Do we need Create? => method have Single Responsiblity!
 
-            return null;
+            // check if config is already existed.
+            if (db.TankConfigs.Any(tc => tc.ConfigName == tankConfig.ConfigName))
+                return false;
+
+            db.TankConfigs.Add(tankConfig);
+            int affected = await db.SaveChangesAsync();
+
+            if (affected == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
-        public async Task<TankConfig> UpdateTankConfigAsync(TankConfig tankConfig)
+        public async Task<bool> UpdateTankConfigAsync(TankConfig tankConfig)
         {
-            TankConfig[] tankConfigs = db.TankConfigs
-                .Where(tc => tc.ConfigName == tankConfig.ConfigName).ToArray();
+            TankConfig originTankConfig = db.TankConfigs.FirstOrDefault(tc => tc.ConfigName == tankConfig.ConfigName);
 
-            if (tankConfigs.Length > 0)
-                tankConfigs[0].ConfigValue =  tankConfig.ConfigValue;
+            if (originTankConfig == null)
+            {
+                return false;
+            }
+
+            originTankConfig.ConfigValue = tankConfig.ConfigValue;
+            int affected = await db.SaveChangesAsync();
+            if (affected == 1)
+            {
+                return true;
+            }
             else
-                await db.TankConfigs.AddAsync(tankConfig);
+            {
+                return false;
+            }
+        }
 
-            await db.SaveChangesAsync();
-
-            return null;
+        public Task<TankConfig> RetrieveTankConfig(string configName)
+        {
+            return Task.Run<TankConfig>(() => db.TankConfigs.FirstOrDefault(tc => tc.ConfigName == configName));
         }
 
         public Task<IEnumerable<TankConfig>> RetrieveAllTankConfigs()
@@ -137,12 +162,12 @@ namespace SkyViewC3Service.Repositories
         private async Task<T> AddCalibration<T>(DbSet<T> dbSet, T calibration) where T : Calibration
         {
             T[] calibrations = dbSet.Where(cal => cal.Reference == calibration.Reference).ToArray();
-            
+
             if (calibrations.Length > 0)
                 calibrations[0].Value = calibration.Value;
             else
                 await dbSet.AddAsync(calibration);
-            
+
             await db.SaveChangesAsync();
 
             return null;
@@ -151,10 +176,10 @@ namespace SkyViewC3Service.Repositories
         private async Task<T> RemoveCalibration<T>(DbSet<T> dbSet, double reference) where T : Calibration
         {
             T[] calibrations = dbSet.Where(cal => cal.Reference == reference).ToArray();
-            
+
             if (calibrations.Length > 0)
                 dbSet.Remove(calibrations[0]);
-                await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
             return null;
         }

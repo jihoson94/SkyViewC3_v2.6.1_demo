@@ -37,6 +37,7 @@
 - [x] ITankRepository
 - [x] TankRepository
 - [x] Create TankConfig
+- [ ] Retrieve TankConfig with config name
 - [x] Update TankConfig
 - [x] Add LN2LevelCalibration
 - [x] Remove LN2LevelClaibration

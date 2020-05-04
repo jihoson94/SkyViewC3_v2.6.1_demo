@@ -5,9 +5,10 @@ namespace SkyViewC3Service.Repositories
 {
     public interface ITankRepository
     {
-        Task<TankConfig> CreateTankConfigAsync(TankConfig tankConfig);
+        Task<bool> CreateTankConfigAsync(TankConfig tankConfig);
+        Task<bool> UpdateTankConfigAsync(TankConfig tankConfig);
 
-        Task<TankConfig> UpdateTankConfigAsync(TankConfig tankConfig);
+        Task<TankConfig> RetrieveTankConfig(string configName);
 
         Task<IEnumerable<TankConfig>> RetrieveAllTankConfigs();
 
