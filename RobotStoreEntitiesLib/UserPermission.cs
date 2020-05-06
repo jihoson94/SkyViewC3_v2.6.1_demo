@@ -7,5 +7,6 @@ namespace RobotStoreEntitiesLib
         public User User { get; set; }
         public string PermissionID { get; set; }
         public Permission Permission { get; set; }
+
     }
 }

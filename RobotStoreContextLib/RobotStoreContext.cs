@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RobotStoreEntitiesLib;
+using System;
 using System.Linq;
 namespace RobotStoreContextLib
 {
@@ -80,8 +81,6 @@ namespace RobotStoreContextLib
                 .WithOne(up => up.User)
                 .HasForeignKey(up => up.UserID);
 
-            // TODO: To be removed later on?
-            modelBuilder.Entity<User>().HasData(new User { UserID = "ADMIN", Name = "admin", Password = "admin" });
             #endregion
 
             #region UserHistory
@@ -95,6 +94,11 @@ namespace RobotStoreContextLib
             #region UserAction
             modelBuilder.Entity<UserAction>().HasKey(ua => ua.UserActionID);
             modelBuilder.Entity<UserAction>().HasOne<User>(ua => ua.User).WithMany().HasForeignKey(ua => ua.UserID);
+            #endregion
+
+            #region Permission
+            modelBuilder.Entity<Permission>().HasKey(p => p.PermissionID);
+            initPermission(modelBuilder);
             #endregion
 
             #region UserPermission
@@ -311,6 +315,15 @@ namespace RobotStoreContextLib
             #endregion
 
             #endregion
+        }
+
+        private void initPermission(ModelBuilder modelBuilder)
+        {
+            // TODO: Add Permissions.
+            modelBuilder.Entity<Permission>().HasData(
+                new Permission[]{
+                    new Permission() { PermissionID = "SuperAdmin" },
+                });
         }
     }
 }

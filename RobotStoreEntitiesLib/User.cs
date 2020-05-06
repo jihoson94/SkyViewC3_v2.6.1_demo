@@ -15,5 +15,8 @@ namespace RobotStoreEntitiesLib
         public string GradeID { get; set; }
         public Grade Grade { get; set; }
         public ICollection<UserPermission> Permissions { get; set; }
+
+
+
     }
 }
