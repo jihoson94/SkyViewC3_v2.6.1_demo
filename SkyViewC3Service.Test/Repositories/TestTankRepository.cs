@@ -15,7 +15,7 @@ namespace SkyViewC3Service.Test.Repositories
 {
     public class TestTankRepository : IDisposable
     {
-        private TankRepository repository;
+        private ITankRepository repository;
         private SqliteConnection connection;
         private RobotStoreContext context;
         // Setup
@@ -62,42 +62,37 @@ namespace SkyViewC3Service.Test.Repositories
         }
 
         [Fact]
+        public async Task TestRetrieveTankConfigAsync()
+        {
+            var tempConfig = new TankConfig() { ConfigName = "RetrieveTankConfigAsyncTest", ConfigValue = "test" };
+
+            bool result = await repository.CreateTankConfigAsync(tempConfig);
+            Assert.True(result);
+
+            TankConfig retrievedConfig = await repository.RetrieveTankConfig(tempConfig.ConfigName);
+            Assert.True(tempConfig.ConfigName == retrievedConfig.ConfigName);
+            Assert.True(tempConfig.ConfigValue == retrievedConfig.ConfigValue);
+        }
+
+
+        [Fact]
         public async Task TestUpdateTankConfigAsync()
         {
+            await repository.CreateTankConfigAsync(new TankConfig()
+            {
+                ConfigName = "Bypass Time",
+                ConfigValue = "0"
+            });
+
             var newTankConfig1 = new TankConfig()
             {
                 ConfigName = "Bypass Time",
                 ConfigValue = "30"
             };
-            var newTankConfig2 = new TankConfig()
-            {
-                ConfigName = "Supply Timeout",
-                ConfigValue = "60"
-            };
-            var newTankConfig3 = new TankConfig()
-            {
-                ConfigName = "Supply Timeout",
-                ConfigValue = "30"
-            };
 
             await repository.UpdateTankConfigAsync(newTankConfig1);
-            var tankConfigs = await repository.RetrieveAllTankConfigs();
-
-            Assert.True(tankConfigs.Count() == 1);
-
-            await repository.UpdateTankConfigAsync(newTankConfig2);
-            tankConfigs = await repository.RetrieveAllTankConfigs();
-
-            Assert.True(tankConfigs.Count() == 2);
-
-            await repository.UpdateTankConfigAsync(newTankConfig3);
-            tankConfigs = await repository.RetrieveAllTankConfigs();
-            var foundConfig = tankConfigs.FirstOrDefault(config => config.ConfigName == newTankConfig3.ConfigName);
-
-            Assert.True(tankConfigs.Count() == 2);
-            Assert.True(foundConfig != null);
-            Assert.True(foundConfig.ConfigName == newTankConfig3.ConfigName);
-            Assert.True(foundConfig.ConfigValue == newTankConfig3.ConfigValue);
+            var retrievedTankConfig = await repository.RetrieveTankConfig($"{newTankConfig1.ConfigName}");
+            Assert.True(retrievedTankConfig.ConfigValue == newTankConfig1.ConfigValue);
         }
 
         [Fact]
